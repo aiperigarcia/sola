@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>Sola</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <script src="https://kit.fontawesome.com/077191d827.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+  <div class="wrapper d-flex align-items-stretch">
+    <nav id="sidebar" class="order-last" class="img" style="background-image: url(images/bg_1.jpg);">
+      <div class="custom-menu">
+        <button type="button" id="sidebarCollapse" class="btn btn-primary">
+        </button>
+      </div>
+      <div class="">
+        <h1><a href="index.html" class="logo">Sola</a></h1>
+        <ul class="list-unstyled components mb-5">
+          <li class="active">
+            <a href="/attendance"><span class="fa fa-eye mr-3"></span> Attendance</a>
+          </li>
+          <li>
+            <a href="/homework"><span class="fa fa-list mr-3"></span> Homework</a>
+          </li>
+          <li>
+            <a href="/progress"><span class="fa fa-chart-bar mr-3"></span> Progress</a>
+          </li>
+          <li>
+            <a href="/events"><span class="fa fa-calendar-alt mr-3"></span> Events</a>
+          </li>
+          <li>
+            <a href="/chat"><span class="fa fa-envelope mr-3"></span> Messages</a>
+          </li>
+          <li>
+            <a href="/myinfo"><span class="fa fa-user-circle mr-3"></span> My info</a>
+          </li>
+          <li>
+            <a href="/logout"><span class="fa fa-sign-out-alt mr-3"></span> Sign Out</a>
+          </li>
+        </ul>
+
+
+      </div>
+
+    </nav>
+
+    <!-- Page Content  -->
+    <div id="content" class="p-4 p-md-5 pt-5">
+       <p>This page will contain homework.</p>
+       <ul>
+         <li>Homework will be as a To Do list.</li>
+         <li>Homework will be posted by teacher for a week.</li>
+         <li>Parent can check as completed the homework after checking child’s homework before bed.</li>
+         <li>Also I want to add a function to upload a picture, parent can take a picture of completed homework and teacher can check it too. Just in case if child forget his homework at home.</li>
+       </ul>
+
+      <section class="hero">
+      <section class="displayInput">
+        <h1>To Do List</h1>
+        <form id="listInput" action="/homework" method="post">
+          <input name="message" placeholder="Enter Task" id="listItem" type="text">
+          <button type="submit" id="addToList">Add</button>
+        </form>
+      </section>
+      <section class="shownList">
+        <ul id="addUl">
+          <% for(var i=0; i<messages.length; i++) {%>
+            <li class="toDoList">
+              <span><%= messages[i].message %></span>
+              <span><%= messages[i].completed %></span>
+              <span><i class="fa fa-trash" aria-hidden="true"></i></span>
+            </li>
+          <% } %>
+        </ul>
+      </section>
+
+        <img src="img/todo.jpeg" alt="" id="mainOne">
+
+
+      </div>
+    </div>
+
+    <script src="js/jquery.copy.min.js"></script>
+    <script src="js/popper.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/main.copy.js"></script>
+</body>
+
+</html>
