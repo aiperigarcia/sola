@@ -55,35 +55,148 @@
 
     <!-- Page Content  -->
     <div id="content" class="p-4 p-md-5 pt-5">
-       <p>This page will contain homework.</p>
-       <ul>
-         <li>Homework will be as a To Do list.</li>
-         <li>Homework will be posted by teacher for a week.</li>
-         <li>Parent can check as completed the homework after checking child’s homework before bed.</li>
-         <li>Also I want to add a function to upload a picture, parent can take a picture of completed homework and teacher can check it too. Just in case if child forget his homework at home.</li>
-       </ul>
-
       <section class="hero">
       <section class="displayInput">
-        <h1>To Do List</h1>
+        <h1>Weekly Homework</h1>
+        <% if (user.local.usertype === 'teacher') { %>
         <form id="listInput" action="/homework" method="post">
+          <select type="text" name="day">
+                  <option value="monday">Monday</option>
+                  <option value="tuesday">Tuesday</option>
+                  <option value="wednesday">Wednesday</option>
+                  <option value="thursday">Thursday</option>
+                  <option value="friday">Friday</option>
+          </select>
+          <select type="text" name="homeworkType">
+                  <option value="read">Read</option>
+                  <option value="watch">Watch</option>
+                  <option value="do">Do</option>
+                  <option value="write">Write</option>
+          </select>
           <input name="message" placeholder="Enter Task" id="listItem" type="text">
           <button type="submit" id="addToList">Add</button>
         </form>
+        <% } %>
+
       </section>
       <section class="shownList">
+
         <ul id="addUl">
           <% for(var i=0; i<messages.length; i++) {%>
+            <% if (messages[i].day == 'monday') { %>
             <li class="toDoList">
+              <p><%= messages[i].day %></p>
+              <% if (user.local.usertype === 'parent') { %>
+                <input type="hidden" name="objectId" value="<%= messages[i]._id%>">
+                <input type="checkbox" name="completed" class="checkbox"
+                <% if(messages[i].completed) { %>
+                  checked
+                  <% }%>
+                  >
+              <% } %>
+              <span><%= messages[i].homeworkType %></span>
               <span><%= messages[i].message %></span>
-              <span><%= messages[i].completed %></span>
-              <span><i class="fa fa-trash" aria-hidden="true"></i></span>
+              <% if (user.local.usertype === 'teacher') { %>
+              <span class="trash"><i class="fa fa-trash" aria-hidden="true"></i></span>
+              <% } %>
             </li>
+              <% } %>
           <% } %>
         </ul>
-      </section>
 
-        <img src="img/todo.jpeg" alt="" id="mainOne">
+        <ul id="addUl">
+          <% for(var i=0; i<messages.length; i++) {%>
+            <% if (messages[i].day == 'tuesday') { %>
+            <li class="toDoList">
+              <p><%= messages[i].day %></p>
+              <% if (user.local.usertype === 'parent') { %>
+                <input type="hidden" name="objectId" value="<%= messages[i]._id%>">
+                <input type="checkbox" name="completed" class="checkbox"
+                  <% if(messages[i].completed) { %>
+                    checked
+                    <% }%>
+                    >
+              <% } %>
+              <span><%= messages[i].homeworkType %></span>
+              <span><%= messages[i].message %></span>
+              <% if (user.local.usertype === 'teacher') { %>
+              <span class="trash"><i class="fa fa-trash" aria-hidden="true"></i></span>
+              <% } %>
+            </li>
+            <% } %>
+          <% } %>
+        </ul>
+
+        <ul id="addUl">
+          <% for(var i=0; i<messages.length; i++) {%>
+            <% if (messages[i].day == 'wednesday') { %>
+            <li class="toDoList">
+              <p><%= messages[i].day %></p>
+              <% if (user.local.usertype === 'parent') { %>
+                <input type="hidden" name="objectId" value="<%= messages[i]._id%>">
+                <input type="checkbox" name="completed" class="checkbox"
+                  <% if(messages[i].completed) { %>
+                    checked
+                    <% }%>
+                    >
+              <% } %>
+              <span><%= messages[i].homeworkType %></span>
+              <span><%= messages[i].message %></span>
+              <% if (user.local.usertype === 'teacher') { %>
+              <span class="trash"><i class="fa fa-trash" aria-hidden="true"></i></span>
+              <% } %>
+            </li>
+            <% } %>
+          <% } %>
+        </ul>
+
+        <ul id="addUl">
+          <% for(var i=0; i<messages.length; i++) {%>
+            <% if (messages[i].day == 'thursday') { %>
+            <li class="toDoList">
+              <p><%= messages[i].day %></p>
+              <% if (user.local.usertype === 'parent') { %>
+                <input type="hidden" name="objectId" value="<%= messages[i]._id%>">
+                <input type="checkbox" name="completed" class="checkbox"
+                  <% if(messages[i].completed) { %>
+                    checked
+                    <% }%>
+                    >
+              <% } %>
+              <span><%= messages[i].homeworkType %></span>
+              <span><%= messages[i].message %></span>
+              <% if (user.local.usertype === 'teacher') { %>
+              <span class="trash"><i class="fa fa-trash" aria-hidden="true"></i></span>
+              <% } %>
+            </li>
+            <% } %>
+          <% } %>
+        </ul>
+
+        <ul id="addUl">
+          <% for(var i=0; i<messages.length; i++) {%>
+            <% if (messages[i].day == 'friday') { %>
+            <li class="toDoList">
+              <p><%= messages[i].day %></p>
+              <% if (user.local.usertype === 'parent') { %>
+                <input type="hidden" name="objectId" value="<%= messages[i]._id%>">
+                 <input type="checkbox" name="completed" class="checkbox"  
+                  <% if(messages[i].completed) { %>
+                    checked
+                    <% }%>
+                    >
+              <% } %>
+              <span><%= messages[i].homeworkType %></span>
+              <span><%= messages[i].message %></span>
+              <% if (user.local.usertype === 'teacher') { %>
+              <span class="trash"><i class="fa fa-trash" aria-hidden="true"></i></span>
+              <% } %>
+            </li>
+            <% } %>
+          <% } %>
+        </ul>
+
+      </section>
 
 
       </div>
@@ -93,6 +206,7 @@
     <script src="js/popper.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/main.copy.js"></script>
+    <script src="homework.js"></script>
 </body>
 
 </html>

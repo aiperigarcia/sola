@@ -30,6 +30,7 @@ module.exports = function(app, passport, db) {
     db.collection('messages').find().toArray((err, result) => {
       if (err) return console.log(err)
       res.render('homework.ejs', {
+        user: req.user,
         messages: result
       })
     })
@@ -37,8 +38,10 @@ module.exports = function(app, passport, db) {
 
   app.post('/homework', (req, res) => {
     db.collection('messages').save({
+      day: req.body.day,
+      homeworkType: req.body.homeworkType,
       message: req.body.message,
-      completed: 'incomplete'
+      completed: false
     }, (err, result) => {
       if (err) return console.log(err)
       console.log('saved to database')
@@ -46,211 +49,210 @@ module.exports = function(app, passport, db) {
     })
   })
 
-  app.put('/update', (req, res) => {
-    db.collection('messages')
-      .findOneAndUpdate({
-        message: req.body.message
-      }, {
-        $set: {
-          message: 'item is done',
-          completed: '[please delete this item]'
-        }
-      }, {
-        sort: {
-          _id: -1
-        },
-        upsert: false
-      }, (err, result) => {
-        if (err) return res.send(err)
-        res.send(result)
-      })
-  })
-
-  app.delete('/homework', (req, res) => {
-    db.collection('messages').findOneAndDelete({
+app.put('/completedStatus', (req, res) => {
+  console.log(req.body.completed)
+  console.log(req.body.message);
+  db.collection('messages')
+    .findOneAndUpdate({
       message: req.body.message
+    }, {
+      $set: {
+        completed: req.body.completed
+      }
+    }, {
+      upsert: false,
+      new: true
     }, (err, result) => {
-      if (err) return res.send(500, err)
-      res.send('Message deleted!')
+      if (err) return res.send(err)
+      res.send(result)
+    })
+})
+
+app.delete('/homework', (req, res) => {
+  db.collection('messages').findOneAndDelete({
+    message: req.body.message
+  }, (err, result) => {
+    if (err) return res.send(500, err)
+    res.send('Message deleted!')
+  })
+})
+
+
+// Attendace ==============================
+app.get('/attendance', isLoggedIn, function(req, res) {
+  db.collection('attendance').find().toArray((err, result) => {
+    if (err) return console.log(err)
+    res.render('attendance.ejs', {
+      // name: name,
+      // attendance: req.body.name
     })
   })
+});
 
-
-  // Attendace ==============================
-  app.get('/attendance', isLoggedIn, function(req, res) {
-    db.collection('attendance').find().toArray((err, result) => {
-      if (err) return console.log(err)
-      res.render('attendance.ejs', {
-        // name: name,
-        // attendance: req.body.name
-      })
-    })
+app.post('/updateattendance', (req, res) => {
+  console.log(Object.keys(req.body));
+  Object.keys(req.body).forEach((name, i) => {
+    db.collection('attendance').save({
+        name: name,
+        attendance: req.body[name]
+      },
+      (err, result) => {
+        if (err) return console.log(err);
+        console.log('saved to database');
+        //refreshing the page, which will then display with the latest message added.
+        //res.redirect('/attendance.ejs');
+      });
   });
-
-  app.post('/updateattendance', (req, res) => {
-    console.log(Object.keys(req.body));
-    Object.keys(req.body).forEach((name, i) => {
-      db.collection('attendance').save({
-          name: name,
-          attendance: req.body[name]
-        },
-        (err, result) => {
-          if (err) return console.log(err);
-          console.log('saved to database');
-          //refreshing the page, which will then display with the latest message added.
-          //res.redirect('/attendance.ejs');
-        });
-    });
-  });
+});
 
 
-  // Progress ==============================
-  app.get('/progress', isLoggedIn, function(req, res) {
-    db.collection('messages').find().toArray((err, result) => {
-      if (err) return console.log(err)
-      res.render('progress.ejs', {
-        user: req.user,
-        messages: result
-      })
-    })
-  });
-
-
-  // Events ==============================
-  app.get('/events', isLoggedIn, function(req, res) {
-    db.collection('messages').find().toArray((err, result) => {
-      if (err) return console.log(err)
-      res.render('events.ejs', {
-        user: req.user,
-        messages: result
-      })
-    })
-  });
-
-
-  // chat ==============================
-  app.get('/chat', isLoggedIn, function(req, res) {
-    db.collection('messages').find().toArray((err, result) => {
-      if (err) return console.log(err)
-      res.render('chat.ejs', {
-        user: req.user,
-        messages: result
-      })
-    })
-  });
-
-
-
-  // PARENT INFO ==============================
-  app.get('/myinfo', isLoggedIn, function(req, res) {
-    db.collection('messages').find().toArray((err, result) => {
-      if (err) return console.log(err)
-      res.render('myinfo.ejs', {
-        user: req.user,
-        messages: result
-      })
-    })
-  });
-
-
-
-  // message board routes ===============================================================
-
-  app.post('/messages', (req, res) => {
-    db.collection('messages').save({
-      name: req.body.name,
-      msg: req.body.msg,
-      thumbUp: 0,
-      thumbDown: 0
-    }, (err, result) => {
-      if (err) return console.log(err)
-      console.log('saved to database')
-      res.redirect('/profile')
+// Progress ==============================
+app.get('/progress', isLoggedIn, function(req, res) {
+  db.collection('messages').find().toArray((err, result) => {
+    if (err) return console.log(err)
+    res.render('progress.ejs', {
+      user: req.user,
+      messages: result
     })
   })
+});
 
-  app.put('/messages', (req, res) => {
-    db.collection('messages')
-      .findOneAndUpdate({
-        name: req.body.name,
-        msg: req.body.msg
-      }, {
-        $set: {
-          thumbUp: req.body.thumbUp + 1
-        }
-      }, {
-        sort: {
-          _id: -1
-        },
-        upsert: true
-      }, (err, result) => {
-        if (err) return res.send(err)
-        res.send(result)
-      })
+
+// Events ==============================
+app.get('/events', isLoggedIn, function(req, res) {
+  db.collection('messages').find().toArray((err, result) => {
+    if (err) return console.log(err)
+    res.render('events.ejs', {
+      user: req.user,
+      messages: result
+    })
   })
+});
 
 
-  app.delete('/messages', (req, res) => {
-    db.collection('messages').findOneAndDelete({
+// chat ==============================
+app.get('/chat', isLoggedIn, function(req, res) {
+  db.collection('messages').find().toArray((err, result) => {
+    if (err) return console.log(err)
+    res.render('chat.ejs', {
+      user: req.user,
+      messages: result
+    })
+  })
+});
+
+
+
+// PARENT INFO ==============================
+app.get('/myinfo', isLoggedIn, function(req, res) {
+  db.collection('messages').find().toArray((err, result) => {
+    if (err) return console.log(err)
+    res.render('myinfo.ejs', {
+      user: req.user,
+      messages: result
+    })
+  })
+});
+
+
+
+// message board routes ===============================================================
+
+app.post('/messages', (req, res) => {
+  db.collection('messages').save({
+    name: req.body.name,
+    msg: req.body.msg,
+    thumbUp: 0,
+    thumbDown: 0
+  }, (err, result) => {
+    if (err) return console.log(err)
+    console.log('saved to database')
+    res.redirect('/profile')
+  })
+})
+
+app.put('/messages', (req, res) => {
+  db.collection('messages')
+    .findOneAndUpdate({
       name: req.body.name,
       msg: req.body.msg
+    }, {
+      $set: {
+        thumbUp: req.body.thumbUp + 1
+      }
+    }, {
+      sort: {
+        _id: -1
+      },
+      upsert: true
     }, (err, result) => {
-      if (err) return res.send(500, err)
-      res.send('Message deleted!')
+      if (err) return res.send(err)
+      res.send(result)
     })
+})
+
+
+app.delete('/messages', (req, res) => {
+  db.collection('messages').findOneAndDelete({
+    name: req.body.name,
+    msg: req.body.msg
+  }, (err, result) => {
+    if (err) return res.send(500, err)
+    res.send('Message deleted!')
   })
+})
 
-  // =============================================================================
-  // AUTHENTICATE (FIRST LOGIN) ==================================================
-  // =============================================================================
+// =============================================================================
+// AUTHENTICATE (FIRST LOGIN) ==================================================
+// =============================================================================
 
-  // locally --------------------------------
-  // LOGIN ===============================
-  // show the login form
-  app.get('/login', function(req, res) {
-    res.render('login.ejs', {
-      message: req.flash('loginMessage')
-    });
+// locally --------------------------------
+// LOGIN ===============================
+// show the login form
+app.get('/login', function(req, res) {
+  res.render('login.ejs', {
+    message: req.flash('loginMessage')
   });
+});
 
-  // process the login form
-  app.post('/login', passport.authenticate('local-login', {
-    successRedirect: '/profile', // redirect to the secure profile section
-    failureRedirect: '/login', // redirect back to the signup page if there is an error
-    failureFlash: true // allow flash messages
-  }));
+// process the login form
+app.post('/login', passport.authenticate('local-login', {
+  successRedirect: '/profile', // redirect to the secure profile section
+  failureRedirect: '/login', // redirect back to the signup page if there is an error
+  failureFlash: true // allow flash messages
+}));
 
-  // SIGNUP =================================
-  // show the signup form
-  app.get('/signup', function(req, res) {
-    res.render('signup.ejs', {
-      message: req.flash('signupMessage')
-    });
+// SIGNUP =================================
+// show the signup form
+app.get('/signup', function(req, res) {
+  res.render('signup.ejs', {
+    message: req.flash('signupMessage')
   });
+});
 
-  // process the signup form
-  app.post('/signup', passport.authenticate('local-signup', {
-    successRedirect: '/profile', // redirect to the secure profile section
-    failureRedirect: '/signup', // redirect back to the signup page if there is an error
-    failureFlash: true // allow flash messages
-  }));
+// process the signup form
+app.post('/signup', passport.authenticate('local-signup', {
+  successRedirect: '/profile', // redirect to the secure profile section
+  failureRedirect: '/signup', // redirect back to the signup page if there is an error
+  failureFlash: true // allow flash messages
+}));
 
-  // =============================================================================
-  // UNLINK ACCOUNTS =============================================================
-  // =============================================================================
-  // used to unlink accounts. for social accounts, just remove the token
-  // for local account, remove email and password
-  // user account will stay active in case they want to reconnect in the future
+// =============================================================================
+// UNLINK ACCOUNTS =============================================================
+// =============================================================================
+// used to unlink accounts. for social accounts, just remove the token
+// for local account, remove email and password
+// user account will stay active in case they want to reconnect in the future
 
-  // local -----------------------------------
-  app.get('/unlink/local', isLoggedIn, function(req, res) {
-    var user = req.user;
-    user.local.email = undefined;
-    user.local.password = undefined;
-    user.save(function(err) {
-      res.redirect('/profile');
-    });
+// local -----------------------------------
+app.get('/unlink/local', isLoggedIn, function(req, res) {
+  var user = req.user;
+  user.local.email = undefined;
+  user.local.password = undefined;
+  user.save(function(err) {
+    res.redirect('/profile');
   });
+});
 
 };
 
