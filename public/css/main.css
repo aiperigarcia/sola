@@ -2280,6 +2280,7 @@ input, select, textarea {
 		#hero h2 {
 			color: #fff;
 			font-size: 3em;
+			font-family: 'Marck Script', cursive;
 		}
 
 		#hero strong {
@@ -2291,8 +2292,9 @@ input, select, textarea {
 		}
 
 		#hero p {
-			font-size: 1.5em;
+			font-size: 28px;
 			line-height: 1.5em;
+			font-family: 'Marck Script', cursive;
 		}
 
 		#hero .button {
