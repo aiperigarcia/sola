@@ -26,6 +26,49 @@
   font-size: 45px;
 }
 
+.major h2 {
+  color: #3883E7;
+  font-size: 40px;
+}
+
+.major p {
+  color: #282a68;
+  font-family: 'Playball', cursive;
+  font-size: 30px;
+  margin: 5%;
+}
+.majorOne{
+  text-align: center;
+}
+.majorOne h2{
+  color: #091a91;
+}
+.majorOne p{
+  color: #091a91;
+  font-family: 'Playball', cursive;
+  font-size: 30px;
+}
+
+#p {
+  color: #282a68;
+  font-family: 'Playball', cursive;
+  font-size: 25px;
+}
+
+#libutton {
+  font-family: 'Playball', cursive;
+  color: #3883E7;
+  font-size: 25px;
+  border-color: #282a68;
+  margin-top: 10%
+}
+.col-12-narrower{
+  color:#091a91 !important;
+}
+
+.menu{
+  color:white !important;
+}
 html, body, div, span, applet, object,
 iframe, h1, h2, h3, h4, h5, h6, p, blockquote,
 pre, a, abbr, acronym, address, big, cite,
@@ -1862,7 +1905,7 @@ ul.icons li {
 ul.icons li:before {
   display: inline-block;
   color: #fff;
-  background: #61666b;
+  background: #b297d5;
   width: 2.5em;
   height: 2.5em;
   border-radius: 0.35em;
