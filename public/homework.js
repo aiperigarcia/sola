@@ -45,7 +45,7 @@ Array.from(completed).forEach(function(element) {
         if (response.ok) return response.json()
       })
       .then(data => {
-        window.location.reload(true)
+        window.location.reload()
       })
   });
 })

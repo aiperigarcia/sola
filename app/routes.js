@@ -83,8 +83,8 @@ module.exports = function(app, passport, db) {
     db.collection('attendance').find().toArray((err, result) => {
       if (err) return console.log(err)
       res.render('attendance.ejs', {
-        // name: name,
-        // attendance: req.body.name
+        user: req.user,
+        attendance: result
       })
     })
   });
@@ -108,8 +108,6 @@ module.exports = function(app, passport, db) {
         (err, result) => {
           if (err) return console.log(err);
           console.log('saved to database');
-          //refreshing the page, which will then display with the latest message added.
-          //res.redirect('/attendance.ejs');
         })
      })
   })

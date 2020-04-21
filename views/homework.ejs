@@ -23,7 +23,7 @@
         </button>
       </div>
       <div class="">
-        <h1><a href="index.html" class="logo">Sola</a></h1>
+        <h1><a href="index.html" class="logo"><i class="far fa-bell"></i> Sola</a></h1>
         <ul class="list-unstyled components mb-5">
           <li class="active">
             <a href="/attendance"><span class="fa fa-eye mr-3"></span> Attendance</a>
@@ -180,7 +180,7 @@
               <p><%= messages[i].day %></p>
               <% if (user.local.usertype === 'parent') { %>
                 <input type="hidden" name="objectId" value="<%= messages[i]._id%>">
-                 <input type="checkbox" name="completed" class="checkbox"  
+                 <input type="checkbox" name="completed" class="checkbox"
                   <% if(messages[i].completed) { %>
                     checked
                     <% }%>

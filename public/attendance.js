@@ -41,8 +41,45 @@ button.addEventListener('click', () => {
 		},
 		body: JSON.stringify(data)
 	})
-	.then(res => res.json())
-  .then(data => console.log(data))
-	.catch(err => console.error(err))
-  console.log("data", data)
+  .then(response => {
+    if (response.ok) return response.json()
+  })
+  .then(data => {
+    console.log(data)
+  })
+  setTimeout(() => {
+    window.location.reload(true)
+  }, 100)
+})
+
+let clear = document.getElementById('buttonClear')
+
+clear.addEventListener('click', () => {
+  var data = {}
+  names.forEach((name, i) => {
+    var studentAttendance = document.querySelectorAll(`.${name.innerText.toLowerCase()}`)
+    console.log("studentAttendance", studentAttendance);
+    data[name.innerText] = {}
+    studentAttendance.forEach((td, i) => {
+      data[name.innerText][days[i].textContent] = '';
+      data[name.innerText].index = i
+      console.log(td.innerText);
+    });
+  });
+  fetch('http://localhost:7070/updateattendance', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  })
+  .then(response => {
+    if (response.ok) return response.json()
+  })
+  .then(data => {
+    console.log(data)
+  })
+  setTimeout(() => {
+    window.location.reload(true)
+  }, 100)
 })
