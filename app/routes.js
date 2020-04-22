@@ -116,14 +116,26 @@ module.exports = function(app, passport, db) {
 
   // Progress ==============================
   app.get('/progress', isLoggedIn, function(req, res) {
-    db.collection('messages').find().toArray((err, result) => {
+    db.collection('chart').find().toArray((err, result) => {
       if (err) return console.log(err)
       res.render('progress.ejs', {
         user: req.user,
-        messages: result
+        chart: result
       })
     })
   });
+
+  app.post('/gradeChart', (req, res) => {
+    console.log(req.body)
+    db.collection('chart').save({
+      student: req.body.student,
+      grade: req.body.grade
+    }, (err, result) => {
+      if (err) return console.log(err)
+      console.log('saved to database')
+      res.redirect('/progress')
+    })
+  })
 
 
   // Events ==============================

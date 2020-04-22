@@ -4,6 +4,12 @@
  * Copyright 2011-2019 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
+@import url('https://fonts.googleapis.com/css2?family=Kurale&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fredericka+the+Great&display=swap');
+
+#content{
+  font-family: 'Kurale', serif;
+ }
 #body {
   display: flex;
   font-family: -apple-system;
@@ -26,7 +32,19 @@ td, th {
   padding: 20px;
   background-color: lavender;
 }
-
+.shownList{
+  display: flex;
+  margin-top: 5%;
+}
+.toDoList{
+  list-style: none;
+}
+#addUl{
+  border: .2em solid black;
+  padding: 1%;
+  margin-right: 4%;
+  width: 100%;
+}
 #submitButton{
   background-color: lavender;
   border: 1px solid #75607c;
@@ -38,6 +56,24 @@ td, th {
   width: 88%;
   height: 700px;
 }
+
+.displayInput h1{
+  font-family: 'Fredericka the Great', cursive !important;
+  text-align: center;
+  color: #113060;
+  margin-bottom: 5%;
+}
+
+#listInput{
+  text-align: center;
+}
+
+.inputMain{
+  margin-right: 2%;
+  background-color: #cfe0ff;
+  border-style: none;
+}
+
 :root {
   --blue: #007bff;
   --indigo: #6610f2;
@@ -481,6 +517,7 @@ pre {
   overflow-y: scroll; }
 
 .container {
+  margin-top: 10%;
   width: 100%;
   padding-right: 15px;
   padding-left: 15px;
@@ -8171,8 +8208,8 @@ body {
   font-size: 14px;
   line-height: 1.8;
   font-weight: normal;
-  background: #fff;
-  color: gray; }
+  background: white;
+  color: #3985EC; }
 
 a {
   -webkit-transition: .3s all ease;

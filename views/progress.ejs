@@ -5,12 +5,10 @@
   <title>Sola</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
   <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
-
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
   <script src="https://kit.fontawesome.com/077191d827.js" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
   <link rel="stylesheet" href="css/style.css">
 </head>
 
@@ -41,9 +39,6 @@
             <a href="/chat"><span class="fa fa-envelope mr-3"></span> Messages</a>
           </li>
           <li>
-            <a href="/myinfo"><span class="fa fa-user-circle mr-3"></span> My info</a>
-          </li>
-          <li>
             <a href="/logout"><span class="fa fa-sign-out-alt mr-3"></span> Sign Out</a>
           </li>
         </ul>
@@ -56,24 +51,28 @@
     <!-- Page Content  -->
 
     <div id="content" class="p-4 p-md-5 pt-5">
-      <p>Progress Page</p>
-      <ul>
-        <li>Parent can see their child progress at school</li>
-        <li>It will have three chart bars</li>
-        <li>Grade chart bar, attendance chart bar, performance chart bar</li>
-      </ul>
-
-
-      <img src="img/chart.png" alt="" id="mainOne">
-
-
+      <% if (user.local.usertype === 'teacher') { %>
+      <div class="form">
+        <p>Grade Students</p>
+        <form class="" action="/gradeChart" method="post">
+          <input type="text" placeholder="Student Name" name="student">
+          <input type="text" placeholder="Student Grade" name="grade">
+          <button type="submit" class="button">Submit</button>
+        </form>
+      </div>
+      <% } %>
+      <div class="container">
+         <canvas id="myChart"></canvas>
+      </div>
     </div>
+
   </div>
 
   <script src="js/jquery.copy.min.js"></script>
   <script src="js/popper.js"></script>
   <script src="js/bootstrap.min.js"></script>
   <script src="js/main.copy.js"></script>
+  <script src="progress.js"></script>
 </body>
 
 </html>

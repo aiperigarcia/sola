@@ -1,5 +1,5 @@
 @import url("fontawesome-all.min.css");
-@import url('https://fonts.googleapis.com/css2?family=Playball&display=swap') @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300italic,400,400italic,600");
+@import url('https://fonts.googleapis.com/css2?family=Playball&display=swap');
 
 #firstimg {
   width: 70%;
@@ -33,9 +33,8 @@
 
 .major p {
   color: #282a68;
-  font-family: 'Playball', cursive;
+  font-family: 'Source Sans Pro', sans-serif;
   font-size: 30px;
-  margin: 5%;
 }
 .majorOne{
   text-align: center;
@@ -45,19 +44,19 @@
 }
 .majorOne p{
   color: #091a91;
-  font-family: 'Playball', cursive;
+  font-family: 'Source Sans Pro', sans-serif;
   font-size: 30px;
 }
 
 #p {
   color: #282a68;
-  font-family: 'Playball', cursive;
+  font-family: 'Source Sans Pro', sans-serif;
   font-size: 25px;
 }
 
 #libutton {
-  font-family: 'Playball', cursive;
-  color: #3883E7;
+  font-family: 'Source Sans Pro', sans-serif;
+  color: #091a91;
   font-size: 25px;
   border-color: #282a68;
   margin-top: 10%
@@ -2135,7 +2134,7 @@ button:hover,
 }
 
 .homepage #header-wrapper {
-  padding: 10em 0 6em 0;
+  padding: 10em 0 10em 0;
   background-size: 128px 128px, 100% 100%, auto;
 }
 
@@ -2317,14 +2316,13 @@ button:hover,
 #sectionHero p, h2 {
   font-size: 35px;
   line-height: 1.5em;
-  font-family: 'Playball', cursive;
+  font-family: 'Source Sans Pro', sans-serif;
 }
 
 #sectionHero h2 {
   margin-bottom: 5%;
   font-size: 50px;
   color: darkslateblue;
-  font-weight: bolder
 }
 
 #hero .button {

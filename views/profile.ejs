@@ -41,9 +41,6 @@
             <a href="/chat"><span class="fa fa-envelope mr-3"></span> Messages</a>
           </li>
           <li>
-            <a href="/myinfo"><span class="fa fa-user-circle mr-3"></span> My info</a>
-          </li>
-          <li>
             <a href="/logout"><span class="fa fa-sign-out-alt mr-3"></span> Sign Out</a>
           </li>
         </ul>
@@ -58,17 +55,23 @@
       <div class="container">
         <div class="col-sm-6">
           <div class="well">
-            <p>This will be user’s main page. It will have notification and news feed.</p>
-            <ul>
-              <li>Notification: Parent will receive notification if their child miss a class or school have any emergency.</li>
-              <li>News feed: All important daily school news.</li>
-            </ul>
-            <img src="img/news.png" alt="">
+            <h3><span class="fa fa-user"></span> Local</h3>
+
+            <% if (user.local.email) { %>
+            <p>
+              <strong>id</strong>: <%= user._id %><br>
+              <strong>email</strong>: <%= user.local.email %><br>
+              <strong>password</strong>: <%= user.local.password %>
+            </p>
+
+            <a href="/unlink/local" class="btn btn-default">Unlink</a>
+            <% } else { %>
+            <a href="/connect/local" class="btn btn-default">Connect Local</a>
+            <% } %>
 
           </div>
         </div>
 
-      </div>
     </div>
 
     <script src="js/jquery.copy.min.js"></script>
