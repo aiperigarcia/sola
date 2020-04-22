@@ -34,7 +34,7 @@ button.addEventListener('click', () => {
       console.log(td.innerText);
     });
   });
-  fetch('http://localhost:7070/updateattendance', {
+  fetch('http://localhost:4444/updateattendance', {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json'
@@ -66,7 +66,7 @@ clear.addEventListener('click', () => {
       console.log(td.innerText);
     });
   });
-  fetch('http://localhost:7070/updateattendance', {
+  fetch('http://localhost:4444/updateattendance', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'

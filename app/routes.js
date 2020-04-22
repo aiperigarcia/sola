@@ -117,6 +117,7 @@ module.exports = function(app, passport, db) {
   // Progress ==============================
   app.get('/progress', isLoggedIn, function(req, res) {
     db.collection('chart').find().toArray((err, result) => {
+      console.log(result)
       if (err) return console.log(err)
       res.render('progress.ejs', {
         user: req.user,
@@ -124,6 +125,15 @@ module.exports = function(app, passport, db) {
       })
     })
   });
+
+  app.get('/progressChart', isLoggedIn, function(req, res) {
+    db.collection('chart').find().toArray((err, result) => {
+      console.log(result)
+      if (err) return console.log(err)
+      res.json(result)
+    })
+  });
+
 
   app.post('/gradeChart', (req, res) => {
     console.log(req.body)
