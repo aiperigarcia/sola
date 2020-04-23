@@ -37,7 +37,7 @@
             <a href="/events"><span class="fa fa-calendar-alt mr-3"></span> Events</a>
           </li>
           <li>
-            <a href="/chat"><span class="fa fa-envelope mr-3"></span> Messages</a>
+            <a href="/messages"><span class="fa fa-envelope mr-3"></span> Messages</a>
           </li>
           <li>
             <a href="/logout"><span class="fa fa-sign-out-alt mr-3"></span> Sign Out</a>
@@ -78,10 +78,11 @@
       <section class="shownList">
 
         <ul id="addUl">
+          <h3>Monday</h3>
           <% for(var i=0; i<messages.length; i++) {%>
             <% if (messages[i].day == 'monday') { %>
             <li class="toDoList">
-              <span><%= messages[i].day %>:</span>
+
               <% if (user.local.usertype === 'parent') { %>
                 <input type="hidden" name="objectId" value="<%= messages[i]._id%>">
                 <input type="checkbox" name="completed" class="checkbox"
@@ -101,10 +102,10 @@
         </ul>
 
         <ul id="addUl">
+          <h3>Tuesday</h3>
           <% for(var i=0; i<messages.length; i++) {%>
             <% if (messages[i].day == 'tuesday') { %>
             <li class="toDoList">
-              <p><%= messages[i].day %></p>
               <% if (user.local.usertype === 'parent') { %>
                 <input type="hidden" name="objectId" value="<%= messages[i]._id%>">
                 <input type="checkbox" name="completed" class="checkbox"
@@ -124,6 +125,7 @@
         </ul>
 
         <ul id="addUl">
+          <h3>Wednesday</h3>
           <% for(var i=0; i<messages.length; i++) {%>
             <% if (messages[i].day == 'wednesday') { %>
             <li class="toDoList">
@@ -147,6 +149,7 @@
         </ul>
 
         <ul id="addUl">
+          <h3>Thursday</h3>
           <% for(var i=0; i<messages.length; i++) {%>
             <% if (messages[i].day == 'thursday') { %>
             <li class="toDoList">
@@ -170,6 +173,7 @@
         </ul>
 
         <ul id="addUl">
+          <h3>Friday</h3>
           <% for(var i=0; i<messages.length; i++) {%>
             <% if (messages[i].day == 'friday') { %>
             <li class="toDoList">

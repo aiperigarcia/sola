@@ -161,16 +161,31 @@ module.exports = function(app, passport, db) {
 
 
   // chat ==============================
-  app.get('/chat', isLoggedIn, function(req, res) {
-    db.collection('messages').find().toArray((err, result) => {
+  app.get('/messages', isLoggedIn, function(req, res) {
+    db.collection('chatroom').find().toArray((err, result) => {
       if (err) return console.log(err)
-      res.render('chat.ejs', {
+      res.render('messages.ejs', {
         user: req.user,
-        messages: result
+        chatroom: result
       })
     })
   });
 
+  app.post('/chat', (req, res) => {
+        db.collection('chatroom').save({name: req.body.name, msg: req.body.msg}, (err, result) => {
+          if (err) return console.log(err)
+          console.log('saved to database')
+          res.redirect('/messages')
+        })
+      })
+
+
+      app.delete('/chat', (req, res) => {
+        db.collection('chatroom').findOneAndDelete({name: req.body.name, msg: req.body.msg}, (err, result) => {
+          if (err) return res.send(500, err)
+          res.send('Message deleted!')
+        })
+      })
 
 
   // PARENT INFO ==============================

@@ -9,6 +9,7 @@
 
 #content{
   font-family: 'Kurale', serif;
+  background: #a6c1e9;
  }
 #body {
   display: flex;
@@ -18,32 +19,47 @@
   justify-content: center;
 }
 .attendance-table{
-  max-width: 700px;
   overflow: scroll;
 }
 table {
-  border: 1px solid #ddd;
   border-collapse: collapse;
+  background: linear-gradient(135deg, #2f89fc 0%, #5effc9 100%);
+  border-radius: 2%;
 }
 
 td, th {
   white-space: nowrap;
-  border: 1px solid #75607c;
+  color: white;
   padding: 20px;
-  background-color: lavender;
+  font-size: 18px;
+  border: .1em solid white;
 }
+
+th{
+  width: 150px;
+}
+
+tr:first-child th:nth-child(1), tr:first-child th:nth-child(6) {
+  border:none;
+}
+
+tr:last-child td:nth-child(1), tr:last-child td:nth-child(6){
+  border:none;
+}
+
+
 .shownList{
-  display: flex;
   margin-top: 5%;
 }
 .toDoList{
   list-style: none;
 }
 #addUl{
-  border: .2em solid black;
   padding: 1%;
   margin-right: 4%;
   width: 100%;
+  color: white;
+  background: linear-gradient(135deg, #2f89fc 0%, #5effc9 100%);
 }
 #submitButton{
   background-color: lavender;
@@ -4426,7 +4442,8 @@ input[type="button"].btn-block {
 
 .progress-bar-striped {
   background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
-  background-image: -o-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+  background-image: -o-
+  (45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
   background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
   background-size: 1rem 1rem; }
 
