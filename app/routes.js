@@ -113,6 +113,29 @@ module.exports = function(app, passport, db) {
   })
 
 
+// New Attendace ==============================
+
+app.get('/newatt', isLoggedIn, function(req, res) {
+  db.collection('present').find().toArray((err, result) => {
+    if (err) return console.log(err)
+    res.render('newatt.ejs', {
+      user: req.user,
+      present: result
+    })
+  })
+});
+
+app.post('/newatt', (req, res) => {
+  db.collection('present').save({
+    name: req.body.name,
+    day: req.body.day,
+    status: req.body.status
+  }, (err, result) => {
+    if (err) return console.log(err)
+    console.log('saved to database')
+    res.redirect('/newatt')
+  })
+})
 
   // Progress ==============================
   app.get('/progress', isLoggedIn, function(req, res) {

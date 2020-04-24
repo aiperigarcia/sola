@@ -53,11 +53,13 @@
         <h3>Messages</h3>
         <div class="chatroom">
           <ul class="messagesParent">
+            <% if (user.local.usertype === 'parent') { %>
             <% for(var i=0; i< chatroom.length; i++) {%>
             <li class="message">
               <span><%= chatroom[i].name%> </span>
               <span><%= chatroom[i].msg %></span>
             </li>
+            <% } %>
             <% } %>
           </ul>
 

@@ -246,6 +246,7 @@ th{
 .messagesParent{
   float: left;
   display: inline;
+  margin-right: 1%;
 }
 .messagesParent li{
    border-radius:12px 12px 12px 0;
@@ -255,6 +256,7 @@ th{
 
 .messagesTeacher{
   float: right;
+  margin-left: 1%;
 }
 
 .messagesTeacher li{
