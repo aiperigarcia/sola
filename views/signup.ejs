@@ -8,9 +8,7 @@
 </head>
 <body>
 <div class="container">
-<div class="col-sm-6 col-sm-offset-3">
-
-    <h1><span class="fa fa-sign-in"></span> Signup</h1>
+<div class="col-sm-6 col-sm-offset-3" id="loginMain">
 
     <% if (message.length > 0) { %>
         <div class="alert alert-danger"><%= message %></div>
@@ -33,7 +31,7 @@
           </select>
         </div>
 
-        <button type="submit" class="btn btn-warning btn-lg">Signup</button>
+        <button type="submit" class="btn btn-warning btn-lg" id="loginButton">Signup</button>
     </form>
 
     <hr>

@@ -6,10 +6,39 @@
  */
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300&display=swap');
 
+/* //////////////// */
+    /* Log In */
+/* //////////////// */
+
+#loginMain{
+  background-image: url(images/overlay.png), url(images/header.svg), linear-gradient(315deg, #3e8df1 0%, #49bfc5 100%) !important;
+  font-size: 22px !important;
+  border-radius: 3% !important;
+  padding: 4% !important;
+  color: white !important;
+}
+
+#loginButton{
+  background: #073880 !important;
+  color: white !important;
+  border: none !important;
+  font-size: 15px !important;
+}
+
+#loginMain a{
+  color: #073880 !important;
+}
+/* //////////////// */
+    /* Main */
+/* //////////////// */
+
+
 body{
   font-family: 'Roboto Condensed', sans-serif !important;
   letter-spacing: 1px !important;
+  background: #edeeef !important;
 }
+
 #content{
 background:#edeeef;
  }
@@ -64,7 +93,7 @@ th{
   margin-right: 4%;
   width: 46%;
   color: white;
-  background-image: linear-gradient(315deg, #2f89fc 0%, #49bfc5 100%);
+  background-image: url(images/overlay.png), url(images/header.svg), linear-gradient(315deg, #3e8df1 0%, #49bfc5 100%);
   border-radius: 3%;
   opacity: .9;
   height: 250px;
@@ -137,8 +166,6 @@ th{
   font-size: 16px;
 }
 
-/* //////////////// */
-
 #submitButton{
   background-color: lavender;
   border: 1px solid #75607c;
@@ -168,11 +195,73 @@ th{
 }
 
 /* //////////////// */
+    /* Progress */
+/* //////////////// */
+
+#progress{
+  text-align: center;
+  font-size: 16px;
+}
+
+.formOne input{
+  border-style:none;
+  border-radius: 5%;
+  text-align: center;
+  background: none;
+  border: 1px solid darkslateblue;
+  color: darkslateblue;
+  margin-right: 2%;
+}
+
+.formOne button{
+  background: none !important;
+  border-radius: 10% !important;
+  border: 1px solid darkslateblue !important;
+}
+
+#chatContainer{
+  background-image: url(images/overlay.png), url(images/header.svg), linear-gradient(315deg, #3e8df1 0%, #49bfc5 100%);
+}
+
+
+
+
+
+/* //////////////// */
     /* Messages */
 /* //////////////// */
 
+.mainpage{
+  display: inline-block;
+}
+.chatroom{
+  display: inline-block;
+  width: 100%;
+}
+.chatroom li{
+  list-style: none;
+  width: 100%;
+  padding: 3%;
+}
+.messagesParent{
+  float: left;
+  display: inline;
+}
+.messagesParent li{
+   border-radius:12px 12px 12px 0;
+   border: .1em solid darkslateblue;
+   display: inline-block;
+}
 
+.messagesTeacher{
+  float: right;
+}
 
+.messagesTeacher li{
+  border: .1em solid darkslateblue;
+  border-radius:12px 12px 0 12px;
+  display: inline-block;
+}
 
 :root {
   --blue: #007bff;
