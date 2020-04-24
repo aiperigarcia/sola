@@ -3,7 +3,7 @@ document.querySelectorAll("td").forEach(cell => {
   if (cell.className != 'name') {
     cell.addEventListener('click', () => {
       cell.innerHTML = 'present'
-      cell.style.background = '#4ca54c'
+      cell.style.background = 'rgb(76, 157, 82)'
     })
   }
 })
@@ -12,7 +12,7 @@ document.querySelectorAll("td").forEach(cell => {
   if (cell.className != 'name') {
     cell.addEventListener('dblclick', () => {
       cell.innerHTML = 'absent'
-      cell.style.background = '#ce7a71'
+      cell.style.background = 'rgb(202, 144, 187)'
     })
   }
 })

@@ -4,63 +4,141 @@
  * Copyright 2011-2019 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
-@import url('https://fonts.googleapis.com/css2?family=Kurale&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Fredericka+the+Great&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300&display=swap');
 
+body{
+  font-family: 'Roboto Condensed', sans-serif !important;
+  letter-spacing: 1px !important;
+}
 #content{
-  font-family: 'Kurale', serif;
-  background: #a6c1e9;
+background:#edeeef;
  }
+
 #body {
   display: flex;
-  font-family: -apple-system;
-  font-size: 90%;
   color: #333;
   justify-content: center;
 }
+
 .attendance-table{
   overflow: scroll;
 }
 table {
   border-collapse: collapse;
-  background: linear-gradient(135deg, #2f89fc 0%, #5effc9 100%);
+  background-image: url(images/overlay.png), url(images/header.svg), linear-gradient(315deg, #2f89fc 0%, #49bfc5 100%);
   border-radius: 2%;
 }
 
 td, th {
   white-space: nowrap;
-  color: white;
+  color: darkslateblue;
   padding: 20px;
-  font-size: 18px;
-  border: .1em solid white;
+  font-size: 17px;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  font-weight: bold;
 }
 
 th{
-  width: 150px;
+  width: 800px;
 }
-
-tr:first-child th:nth-child(1), tr:first-child th:nth-child(6) {
-  border:none;
-}
-
-tr:last-child td:nth-child(1), tr:last-child td:nth-child(6){
-  border:none;
-}
-
 
 .shownList{
   margin-top: 5%;
+  margin-left: 5%;
+  display: flex;
+  flex-flow: row wrap;
 }
 .toDoList{
   list-style: none;
 }
+
+
+/* //////////////// */
+    /* Homework */
+/* //////////////// */
+
+
 #addUl{
+  text-align: center;
   padding: 1%;
   margin-right: 4%;
-  width: 100%;
+  width: 46%;
   color: white;
-  background: linear-gradient(135deg, #2f89fc 0%, #5effc9 100%);
+  background-image: linear-gradient(315deg, #2f89fc 0%, #49bfc5 100%);
+  border-radius: 3%;
+  opacity: .9;
+  height: 250px;
 }
+
+#addUl:last-child{
+  margin-left: 22%;
+}
+
+#addUl h3{
+  color: darkslateblue;
+  font-size: 25px;
+  font-weight: bold;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.4);
+}
+
+#addUl span{
+  font-size: 18px;
+}
+
+#homework{
+  color: #472e97;
+  font-size: 18px;
+  float: left;
+}
+
+.trash{
+  float: right;
+}
+
+.displayInput h1{
+  text-align: center;
+  color: darkslateblue;
+}
+
+.inputMain{
+    margin-right: 2%;
+    border: .5px solid darkslateblue;
+    font-size: 19px;
+    background-color: #edeeef;
+    color: darkslateblue;
+}
+
+#listInput{
+  text-align: center;
+  margin-top: 2%;
+  background-color:none;
+}
+
+#addToList{
+  font-size: 14px;
+  background-color: #edeeef;
+  border: 0.5px solid darkslateblue;
+  border-radius: 7%;
+  color: darkslateblue;
+  width: 10%;
+}
+
+#listItem{
+  font-size: 14px;
+  border-radius: 7%;
+  text-align: center;
+  border: 1.3px solid darkslateblue;
+  background-color: #edeeef;
+  color: darkslateblue;
+}
+
+#listItem::placeholder {
+  color: darkslateblue;
+  font-size: 16px;
+}
+
+/* //////////////// */
+
 #submitButton{
   background-color: lavender;
   border: 1px solid #75607c;
@@ -73,22 +151,28 @@ tr:last-child td:nth-child(1), tr:last-child td:nth-child(6){
   height: 700px;
 }
 
-.displayInput h1{
-  font-family: 'Fredericka the Great', cursive !important;
-  text-align: center;
-  color: #113060;
-  margin-bottom: 5%;
+
+#button, #buttonClear{
+    margin-top: 3%;
+    margin-right: 4%;
+    background: #063782 ;
+    color: white;
+    width: 8% ;
+    font-size: 18px;
+    border-radius: 10%;
+    border: none;
 }
 
-#listInput{
-  text-align: center;
+#button{
+  margin-left: 40% !important;
 }
 
-.inputMain{
-  margin-right: 2%;
-  background-color: #cfe0ff;
-  border-style: none;
-}
+/* //////////////// */
+    /* Messages */
+/* //////////////// */
+
+
+
 
 :root {
   --blue: #007bff;
@@ -8253,7 +8337,6 @@ h1, h2, h3, h4, h5,
 .h1, .h2, .h3, .h4, .h5 {
   line-height: 1.5;
   font-weight: 400;
-  font-family: "Poppins", Arial, sans-serif;
   color: #000; }
 
 .img {

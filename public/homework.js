@@ -2,17 +2,16 @@ const completed = document.getElementsByClassName("checkbox")
 const trash = document.getElementsByClassName('trash');
 
 Array.from(trash).forEach(function(element) {
+  element.prevent
   element.addEventListener('click', function() {
-    const day = this.parentNode.childNodes[1].innerText
-    const homeworkType = this.parentNode.childNodes[3].innerText
-    const message = this.parentNode.childNodes[5].innerText
+    const homeworkType = this.parentNode.childNodes[1].innerText
+    const message = this.parentNode.childNodes[3].innerText
     fetch('homework', {
       method: 'delete',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        'day': day,
         'homeworkType': homeworkType,
         'message': message
       })
@@ -25,7 +24,7 @@ Array.from(trash).forEach(function(element) {
 
 Array.from(completed).forEach(function(element) {
   element.addEventListener('click', function() {
-    const message = this.parentNode.childNodes[9].innerText
+    const message = this.parentNode.childNodes[7].innerText
     let completed = false
     if(element.checked !== completed){
       completed = !completed

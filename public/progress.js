@@ -25,12 +25,20 @@ fetch('progressChart', {
       data: {
         labels: student,
         datasets: [{
-          label: 'Population',
+          label: 'Grade',
           data: grade,
           //backgroundColor:'green',
           backgroundColor: [
             'rgba(255, 99, 132, 0.6)',
-            'rgba(54, 162, 235, 0.6)'
+            'rgba(54, 162, 235, 0.6)',
+            'rgba(255, 206, 86, 0.6)',
+            'rgba(75, 192, 192, 0.6)',
+            'rgba(153, 102, 255, 0.6)',
+            'rgba(255, 159, 64, 0.6)',
+            'rgba(255, 181, 197, 0.6)',
+            'rgba(131, 111, 255, 0.6)',
+            'rgba(156, 102, 131, 0.6)',
+            'rgba(113, 113, 198, 0.6)'
           ],
           borderWidth: 1,
           borderColor: '#777',
@@ -41,7 +49,7 @@ fetch('progressChart', {
       options: {
         title: {
           display: true,
-          text: 'Largest Cities In Massachusetts',
+          text: 'Final Grade',
           fontSize: 25
         },
         legend: {
