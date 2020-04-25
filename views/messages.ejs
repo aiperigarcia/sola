@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <script src="https://kit.fontawesome.com/077191d827.js" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="/css/style.css">
 </head>
 
 <body>
@@ -74,6 +74,7 @@
              <select class="parents" name="to">
                  <option value="<%= parentInfo.local.email %>"><%= parentInfo.local.email %></option>
              </select>
+             <input type="text" name="id" value="<%= parentInfo._id %>">
              <input type="text" value="<%= user.local.email %>" name="from">
              <input type="text" placeholder="message" name="msg">
              <button type="submit"><i class="fas fa-paper-plane"></i></button>

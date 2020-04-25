@@ -174,21 +174,88 @@ app.get('/newatt', isLoggedIn, function(req, res) {
 });
 
 app.post('/newatt', (req, res) => {
-  db.collection('present').findOneAndUpdate({
+  db.collection('present').save({
     name: req.body.name,
-    day: req.body.day,
-    status: req.body.status
-  },{
-    $set: {
-       name: req.body.name,
-       status: req.body.status
+    week: {
+      monday: '',
+      tuesday: '',
+      wednesday: '',
+      thursday: '',
+      friday: ''
     }
-   (err, result) => {
+  },(err, result) => {
     if (err) return console.log(err)
     console.log('saved to database')
     res.redirect('/newatt')
   })
 })
+
+app.delete('/clearatt', (req, res) => {
+  console.log('delete');
+  db.collection('present').remove({
+
+  }, (err, result) => {
+    if (err) return res.send(500, err)
+    res.send('Message deleted!')
+  })
+})
+
+app.put('/newatt', (req, res) => {
+  console.log(req.body);
+  let dayId = `week.${req.body.dayId}`
+  db.collection('present')
+    .bulkWrite([
+     {
+       updateOne: {
+         'filter': { _id: ObjectId(req.body.userIdOne)},
+         'update': { $set: { [dayId]: req.body.attendanceOne}}
+       }
+     },
+     {
+       updateOne: {
+         'filter': { _id: ObjectId(req.body.userIdTwo)},
+         'update': { $set: { [dayId]: req.body.attendanceTwo}}
+       }
+     },
+     {
+       updateOne: {
+         'filter': { _id: ObjectId(req.body.userIdThree)},
+         'update': { $set: { [dayId]: req.body.attendanceThree}}
+       }
+     },
+     {
+       updateOne: {
+         'filter': { _id: ObjectId(req.body.userIdFour)},
+         'update': { $set: { [dayId]: req.body.attendanceFour}}
+       }
+     },
+     {
+       updateOne: {
+         'filter': { _id: ObjectId(req.body.userIdFive)},
+         'update': { $set: { [dayId]: req.body.attendanceFive}}
+       }
+     },
+     {
+       updateOne: {
+         'filter': { _id: ObjectId(req.body.userIdSix)},
+         'update': { $set: { [dayId]: req.body.attendanceSix}}
+       }
+     },
+     {
+       updateOne: {
+         'filter': { _id: ObjectId(req.body.userIdSeven)},
+         'update': { $set: { [dayId]: req.body.attendanceSeven}}
+       }
+     },
+     {
+       updateOne: {
+         'filter': { _id: ObjectId(req.body.userIdEight)},
+         'update': { $set: { [dayId]: req.body.attendanceEight}}
+       }
+     }
+   ])
+  })
+
 
   // Progress ==============================
   app.get('/progress', isLoggedIn, function(req, res) {
@@ -254,7 +321,7 @@ app.post('/newatt', (req, res) => {
   });
 
   app.post('/chat', (req, res) => {
-    let param = req.body.to
+    let param = req.body.id
         db.collection('chatroom').save({
           from: req.body.from,
           to: req.body.to,
