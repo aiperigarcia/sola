@@ -84,18 +84,55 @@
               </tr>
             </thead>
             <tbody>
-                <% for(var i=0; i<present.length; i++) {%>
+                <% for(var i=0; i< present.length; i++) {%>
                   <% if (present[i].day == 'monday') { %>
                 <tr>
                   <td><%= present[i].name %></td>
                   <td><%= present[i].status %></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
                 </tr>
-                <% } %>
               <% } %>
                 <tr>
-                  <% for(var i=0; i<present.length; i++) {%>
                     <% if (present[i].day == 'tuesday') { %>
                   <td><%= present[i].name %></td>
+                  <td></td>
+                  <td><%= present[i].status %></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <% } %>
+                </tr>
+                <tr>
+                    <% if (present[i].day == 'wednesday') { %>
+                  <td><%= present[i].name %></td>
+                  <td></td>
+                  <td></td>
+                  <td><%= present[i].status %></td>
+                  <td></td>
+                  <td></td>
+                  <% } %>
+                </tr>
+                <tr>
+                    <% if (present[i].day == 'thursday') { %>
+                  <td><%= present[i].name %></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td><%= present[i].status %></td>
+                  <td></td>
+
+                  <% } %>
+                </tr>
+                <tr>
+                    <% if (present[i].day == 'friday') { %>
+                  <td><%= present[i].name %></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
                   <td><%= present[i].status %></td>
                     <% } %>
                   <% } %>

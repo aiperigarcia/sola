@@ -1,4 +1,4 @@
-module.exports = function(app, passport, db) {
+module.exports = function(app, passport, db, ObjectId) {
 
   // normal routes ===============================================================
 
@@ -9,14 +9,62 @@ module.exports = function(app, passport, db) {
 
   // PROFILE SECTION =========================
   app.get('/profile', isLoggedIn, function(req, res) {
-    db.collection('messages').find().toArray((err, result) => {
+    db.collection('users').find().toArray((err, result) => {
       if (err) return console.log(err)
       res.render('profile.ejs', {
         user: req.user,
-        messages: result
+        allusers: result
       })
     })
   });
+
+  app.put('/addparent', (req, res) => {
+    let teacher = req.body.teacher
+    let parentId = req.body.parentId
+    let parent = req.body.parent
+    db.collection('users')
+      .findOneAndUpdate({
+        "local.email": teacher
+      }, {
+        $addToSet: {
+          "local.myconnections": {
+            id: parentId,
+            email: parent
+          },
+
+        }
+      }, {
+        upsert: true
+      }, (err, result) => {
+        if (err) return res.send(err)
+        res.send(result)
+      })
+  })
+
+  app.put('/addteacher', (req, res) => {
+    let teacher = req.body.teacher
+    let teacherId = ObjectId(req.session.passport.user)
+    let parentId = req.body.parentId
+    let parent = req.body.parent
+    db.collection('users')
+      .findOneAndUpdate({
+        "local.email": parent
+      }, {
+        $addToSet: {
+          "local.myconnections": {
+            id: teacherId,
+            email: teacher
+          }
+        }
+      }, {
+        upsert: true
+      }, (err, result) => {
+        if (err) return res.send(err)
+        res.send(result)
+      })
+  })
+
+
 
   // LOGOUT ==============================
   app.get('/logout', function(req, res) {
@@ -126,11 +174,16 @@ app.get('/newatt', isLoggedIn, function(req, res) {
 });
 
 app.post('/newatt', (req, res) => {
-  db.collection('present').save({
+  db.collection('present').findOneAndUpdate({
     name: req.body.name,
     day: req.body.day,
     status: req.body.status
-  }, (err, result) => {
+  },{
+    $set: {
+       name: req.body.name,
+       status: req.body.status
+    }
+   (err, result) => {
     if (err) return console.log(err)
     console.log('saved to database')
     res.redirect('/newatt')
@@ -184,21 +237,32 @@ app.post('/newatt', (req, res) => {
 
 
   // chat ==============================
-  app.get('/messages', isLoggedIn, function(req, res) {
-    db.collection('chatroom').find().toArray((err, result) => {
-      if (err) return console.log(err)
-      res.render('messages.ejs', {
-        user: req.user,
-        chatroom: result
+  app.get('/messages/:parentId', isLoggedIn, function(req, res) {
+    var parentId = ObjectId(req.params.parentId)
+    db.collection('users').find({
+      "_id": parentId
+    }).toArray((err, result) => {
+      db.collection('chatroom').find().toArray((err, messages) => {
+          if (err) return console.log(err)
+          res.render('messages.ejs', {
+            user: req.user,
+            parentInfo: result[0],
+            chatroom: messages
+          })
+        })
       })
-    })
   });
 
   app.post('/chat', (req, res) => {
-        db.collection('chatroom').save({name: req.body.name, msg: req.body.msg}, (err, result) => {
+    let param = req.body.to
+        db.collection('chatroom').save({
+          from: req.body.from,
+          to: req.body.to,
+          msg: req.body.msg
+        }, (err, result) => {
           if (err) return console.log(err)
           console.log('saved to database')
-          res.redirect('/messages')
+          res.redirect(`/messages/${param}`)
         })
       })
 
@@ -229,9 +293,7 @@ app.post('/newatt', (req, res) => {
   app.post('/messages', (req, res) => {
     db.collection('messages').save({
       name: req.body.name,
-      msg: req.body.msg,
-      thumbUp: 0,
-      thumbDown: 0
+      msg: req.body.msg
     }, (err, result) => {
       if (err) return console.log(err)
       console.log('saved to database')

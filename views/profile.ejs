@@ -60,7 +60,7 @@
             <% if (user.local.email) { %>
             <p>
               <strong>id</strong>: <%= user._id %><br>
-              <strong>email</strong>: <%= user.local.email %><br>
+              <strong>email</strong>: <span class="teacherEmail"><%= user.local.email %></span><br>
               <strong>password</strong>: <%= user.local.password %>
             </p>
 
@@ -68,7 +68,33 @@
             <% } else { %>
             <a href="/connect/local" class="btn btn-default">Connect Local</a>
             <% } %>
+          </div>
+          <div class="">
+            <h2>My Connections</h2>
+            <ul>
+              <% for(var i=0; i < user.local.myconnections.length; i++) {%>
+               <li>
+                 <span><%= user.local.myconnections[i].email %></span>
+                 <span><a href="/messages/<%= user.local.myconnections[i].id %>"><i class="fas fa-paper-plane"></i></a></span>
+               </li>
+                <% } %>
+            </ul>
 
+            <% if(user.local.usertype == 'teacher') {%>
+
+            <h3>Add a parent</h3>
+            <ul>
+              <% for(var i=0; i < allusers.length; i++) {%>
+              <% if (allusers[i].local.usertype == "parent" && allusers[i].local.myconnections.length === 0) { %>
+              <li>
+                <span class="hide"><%= allusers[i]._id %></span>
+                <span><%= allusers[i].local.email %></span>
+                <span><i class="fas fa-plus-square"></i></span>
+              </li>
+              <% } %>
+              <% } %>
+              <% } %>
+            </ul>
           </div>
         </div>
       </div>
@@ -79,6 +105,7 @@
     <script src="js/popper.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/main.copy.js"></script>
+    <script src="profile.js"></script>
 </body>
 
 </html>

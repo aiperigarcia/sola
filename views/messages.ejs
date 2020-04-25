@@ -34,9 +34,6 @@
             <a href="/events"><span class="fa fa-calendar-alt mr-3"></span> Events</a>
           </li>
           <li>
-            <a href="/messages"><span class="fa fa-envelope mr-3"></span> Messages</a>
-          </li>
-          <li>
             <a href="/logout"><span class="fa fa-sign-out-alt mr-3"></span> Sign Out</a>
           </li>
         </ul>
@@ -53,32 +50,31 @@
         <h3>Messages</h3>
         <div class="chatroom">
           <ul class="messagesParent">
-            <% if (user.local.usertype === 'parent') { %>
-            <% for(var i=0; i< chatroom.length; i++) {%>
+
+            <% for(var i=0; i < chatroom.length; i++) {%>
+              <% if (chatroom[i].to == parentInfo.local.email) { %>
             <li class="message">
               <span><%= chatroom[i].name%> </span>
               <span><%= chatroom[i].msg %></span>
             </li>
-            <% } %>
+            <% } else if (chatroom[i].from == parentInfo.local.email) { %>
+          <li class="message">
+            <span><%= chatroom[i].name%> </span>
+            <span><%= chatroom[i].msg %></span>
+          </li>
+              <% } %>
             <% } %>
           </ul>
 
-          <ul class="messagesTeacher">
-              <% for(var i=0; i< chatroom.length; i++) {%>
-              <% if (user.local.email == chatroom[i].name) { %>
-              <li class="message">
-                <span><%= chatroom[i].name%></span>
-                <span><%= chatroom[i].msg %></span>
-              </li>
-              <% } %>
-              <% } %>
-            </ul>
         </div>
          <div class="messageBox">
            <h2>Send a message</h2>
            <% if (user.local.email) { %>
            <form action="/chat" method="POST">
-             <input type="text" value="<%= user.local.email %>" name="name">
+             <select class="parents" name="to">
+                 <option value="<%= parentInfo.local.email %>"><%= parentInfo.local.email %></option>
+             </select>
+             <input type="text" value="<%= user.local.email %>" name="from">
              <input type="text" placeholder="message" name="msg">
              <button type="submit"><i class="fas fa-paper-plane"></i></button>
            </form>

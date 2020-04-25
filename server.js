@@ -19,11 +19,12 @@ var configDB = require('./config/database.js');
 
 var db
 
+var ObjectId = require('mongodb').ObjectID
 // configuration ===============================================================
 mongoose.connect(configDB.url, (err, database) => {
   if (err) return console.log(err)
   db = database
-  require('./app/routes.js')(app, passport, db);
+  require('./app/routes.js')(app, passport, db, ObjectId);
 }); // connect to our database
 
 //app.listen(port, () => {
